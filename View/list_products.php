@@ -1,3 +1,14 @@
+<style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+        }
+</style>
+
 <div class="container mt-4">
     <h2 class="mb-4">Danh Sách Sản Phẩm</h2>
     <div class="row">

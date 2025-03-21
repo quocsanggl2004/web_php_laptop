@@ -10,16 +10,7 @@ $productModel = new ProductModel();
     <link rel="stylesheet" href="View/style/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Quản lý Laptop</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .content {
-            flex: 1;
-        }
-    </style>
+
 </head>
 <body>
 <div class="content">
