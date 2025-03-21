@@ -1,3 +1,7 @@
+<?php
+require_once './Model/ProductModel.php';
+$productModel = new ProductModel();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +17,38 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="index.php">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=listProductTypes">Loại sản phẩm</a></li>
+                
+<!-- Submenu Loại sản phẩm -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+        Loại sản phẩm
+    </a>
+    <ul class="dropdown-menu">
+        <?php
+        $types = $productModel->getAllProductTypes();
+        foreach ($types as $type) {
+            echo '<li><a class="dropdown-item" href="index.php?action=listProductsByType&idLoai=' . $type['IDLoai'] . '">' . $type['TenLoai'] . '</a></li>';
+        }
+        ?>
+    </ul>
+</li>
+
+<!-- Submenu Tên Hãng -->
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownHang" role="button" data-bs-toggle="dropdown">
+        Tên Hãng
+    </a>
+    <ul class="dropdown-menu">
+        <?php
+        $brands = $productModel->getAllBrands();
+        foreach ($brands as $brand) {
+            echo '<li><a class="dropdown-item" href="index.php?action=listProductsByBrand&idHang=' . $brand['IDHang'] . '">' . $brand['TenHang'] . '</a></li>';
+        }
+        ?>
+    </ul>
+</li>
+
+
             </ul>
             <form class="d-flex" method="GET" action="index.php">
                 <input type="hidden" name="action" value="search">

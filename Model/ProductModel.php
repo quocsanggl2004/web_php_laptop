@@ -37,5 +37,19 @@ class ProductModel {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function getAllBrands() {
+        $query = "SELECT IDHang, TenHang FROM hangsanpham";
+        $result = $this->conn->query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getProductsByBrand($idHang) {
+        $stmt = $this->conn->prepare("SELECT * FROM sanpham WHERE IDHang = ?");
+        $stmt->bind_param('i', $idHang);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>
