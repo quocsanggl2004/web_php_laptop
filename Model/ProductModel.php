@@ -51,5 +51,21 @@ class ProductModel {
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    public function registerUser($username, $password) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+        $stmt->bind_param('ss', $username, $hashedPassword);
+        return $stmt->execute();
+    }
+
+    public function loginUser($username, $password) {
+        $stmt = $this->conn->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result && password_verify($password, $result['password']);
+    }
+
 }
 ?>

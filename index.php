@@ -1,30 +1,69 @@
 <?php
+session_start();
+require_once './Model/ProductModel.php';
 require_once './Controller/ProductController.php';
-$productController = new ProductController();
-$action = isset($_GET['action']) ? $_GET['action'] : '';
 
-include './View/header.php';
+$productModel = new ProductModel();
+$productController = new ProductController();
+
+$action = $_GET['action'] ?? 'home';
+
+// Xử lý đăng ký
+if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($productModel->registerUser($username, $password)) {
+        echo "<script>alert('Đăng ký thành công!'); window.location.href='index.php?action=login';</script>";
+    } else {
+        echo "<script>alert('Tên đăng nhập đã tồn tại!'); window.history.back();</script>";
+    }
+}
+
+// Xử lý đăng nhập
+if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($productModel->loginUser($username, $password)) {
+        $_SESSION['username'] = $username;
+        echo "<script>alert('Đăng nhập thành công!'); window.location.href='index.php';</script>";
+    } else {
+        echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu!'); window.history.back();</script>";
+    }
+}
+
+// Xử lý đăng xuất
+if ($action === 'logout') {
+    session_destroy();
+    echo "<script>alert('Đã đăng xuất!'); window.location.href='index.php';</script>";
+}
+
+// Load giao diện
+require 'View/header.php';
 
 switch ($action) {
+    case 'login':
+        require 'View/login.php';
+        break;
+    case 'register':
+        require 'View/register.php';
+        break;
     case 'listProductsByType':
-        $idLoai = isset($_GET['idLoai']) ? $_GET['idLoai'] : '';
+        $idLoai = $_GET['idLoai'] ?? '';
         $productController->listProductsByType($idLoai);
         break;
-
     case 'listProductsByBrand':
-        $idHang = isset($_GET['idHang']) ? $_GET['idHang'] : '';
+        $idHang = $_GET['idHang'] ?? '';
         $productController->listProductsByBrand($idHang);
         break;
-        
     case 'search':
-        $name = isset($_GET['name']) ? $_GET['name'] : '';
+        $name = $_GET['name'] ?? '';
         $productController->searchProducts($name);
         break;
-
     default:
         $productController->listProducts();
         break;
 }
 
-include './View/footer.php';
-?>
+require 'View/footer.php';

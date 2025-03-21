@@ -1,9 +1,4 @@
 <?php
-
-require_once __DIR__ . '/../Model/UserModel.php';
-require_once __DIR__ . '/../Model/ProductModel.php';
-
-
 class UserController {
     private $userModel;
 
@@ -52,7 +47,6 @@ class UserController {
         if ($result) {
             $this->showLoginForm('Đăng ký thành công! Vui lòng đăng nhập.');
         } else {
-            $this->showRegistrationForm('Tên đăng nhập đã tồn tại hoặc đã xảy ra lỗi.');
         }
     }
 
@@ -64,4 +58,3 @@ class UserController {
         exit;
     }
 }
-?>
