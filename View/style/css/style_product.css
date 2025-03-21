@@ -1,0 +1,16 @@
+h2 {
+    text-align: center;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-text strong {
+    color: red;
+}
+

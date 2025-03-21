@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="View/style/css/style_function.css">
+</head>
+<body>
 <div class="container mt-5">
     <h2 class="text-center">Đăng Nhập</h2>
     <form action="index.php?action=login" method="post">
@@ -12,3 +20,7 @@
         <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
     </form>
 </div>
+</body>
+</html>
+
+

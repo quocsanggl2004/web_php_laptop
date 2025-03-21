@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="View/style/css/style_function.css">
+
+</head>
+<body>
 <div class="container mt-5">
     <h2 class="text-center">Đăng Ký</h2>
     <form action="index.php?action=register" method="post">
@@ -12,3 +21,6 @@
         <button type="submit" class="btn btn-success w-100">Đăng Ký</button>
     </form>
 </div>
+</body>
+</html>
+

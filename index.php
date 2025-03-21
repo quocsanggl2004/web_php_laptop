@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once './Model/ProductModel.php';
-require_once './Controller/ProductController.php';
+require_once './Model/mProducts.php';
+require_once './Controller/cProducts.php';
 
 $productModel = new ProductModel();
 $productController = new ProductController();
@@ -41,6 +41,7 @@ if ($action === 'logout') {
 
 // Load giao diện
 require 'View/header.php';
+require 'View/menu.php';
 
 switch ($action) {
     case 'login':
