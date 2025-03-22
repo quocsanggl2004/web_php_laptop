@@ -25,29 +25,16 @@ class UserController {
             $_SESSION['username'] = $user['Username'];
             header('Location: index.php');
             exit;
-        } else {
-            $this->showLoginForm('Tên đăng nhập hoặc mật khẩu không đúng.');
         }
+        
+        $this->showLoginForm('Tên đăng nhập hoặc mật khẩu không đúng.');
     }
 
     // Process registration
     public function register($username, $password) {
-        if (strlen($username) < 4) {
-            $this->showRegistrationForm('Tên đăng nhập phải có ít nhất 4 ký tự.');
-            return;
-        }
-        
-        if (strlen($password) < 6) {
-            $this->showRegistrationForm('Mật khẩu phải có ít nhất 6 ký tự.');
-            return;
-        }
-        
-        $result = $this->userModel->registerUser($username, $password);
-        
-        if ($result) {
-            $this->showLoginForm('Đăng ký thành công! Vui lòng đăng nhập.');
-        } else {
-        }
+        // Chỉ kiểm tra và thực hiện đăng ký
+        $this->userModel->registerUser($username, $password);
+        $this->showLoginForm('Đăng ký thành công! Vui lòng đăng nhập.');
     }
 
     // Process logout

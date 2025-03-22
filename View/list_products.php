@@ -11,6 +11,7 @@
                             <del><?= number_format($product['GiaCu']) ?> VNĐ</del>
                             <strong><?= number_format($product['GiaMoi']) ?> VNĐ</strong>
                         </p>
+                        <p class="card-text">Số lượng tồn: <?= $product['SoLuongTon'] ?></p>
                         <button class="btn btn-primary">Mua ngay</button>
                     </div>
                 </div>

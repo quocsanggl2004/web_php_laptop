@@ -3,52 +3,21 @@ session_start();
 require_once './Model/mProducts.php';
 require_once './Controller/cProducts.php';
 
-$productModel = new ProductModel();
 $productController = new ProductController();
 
 $action = $_GET['action'] ?? 'home';
-
-// Xử lý đăng ký
-if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if ($productModel->registerUser($username, $password)) {
-        echo "<script>alert('Đăng ký thành công!'); window.location.href='index.php?action=login';</script>";
-    } else {
-        echo "<script>alert('Tên đăng nhập đã tồn tại!'); window.history.back();</script>";
-    }
-}
-
-// Xử lý đăng nhập
-if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if ($productModel->loginUser($username, $password)) {
-        $_SESSION['username'] = $username;
-        echo "<script>alert('Đăng nhập thành công!'); window.location.href='index.php';</script>";
-    } else {
-        echo "<script>alert('Sai tên đăng nhập hoặc mật khẩu!'); window.history.back();</script>";
-    }
-}
-
-// Xử lý đăng xuất
-if ($action === 'logout') {
-    session_destroy();
-    echo "<script>alert('Đã đăng xuất!'); window.location.href='index.php';</script>";
-}
-
-// Load giao diện
-require 'View/header.php';
-require 'View/menu.php';
-
+require 'View/layout/header.php';
+require 'View/layout/menu.php';
+// Xử lý các hành động
 switch ($action) {
     case 'login':
-        require 'View/login.php';
+        $productController->handleLogin();
         break;
     case 'register':
-        require 'View/register.php';
+        $productController->handleRegister();
+        break;
+    case 'logout':
+        $productController->handleLogout();
         break;
     case 'listProductsByType':
         $idLoai = $_GET['idLoai'] ?? '';
@@ -67,4 +36,6 @@ switch ($action) {
         break;
 }
 
-require 'View/footer.php';
+
+
+require 'View/layout/footer.php';
