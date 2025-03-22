@@ -5,11 +5,11 @@
             <p>Không tìm thấy sản phẩm nào.</p>
         <?php else: ?>
             <?php foreach ($products as $product): ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
                     <div class="card">
                         <img src="View/style/img/<?= htmlentities($product['HinhAnh']) ?>" class="card-img-top" alt="<?= htmlentities($product['TenLaptop']) ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?= htmlentities($product['TenLaptop']) ?></h5>
+                            <h5 class="card-title" style="font-size: 16px;"><?= htmlentities($product['TenLaptop']) ?></h5>
                             <p class="card-text">
                                 <del><?= number_format($product['GiaCu']) ?> VNĐ</del>
                                 <strong><?= number_format($product['GiaMoi']) ?> VNĐ</strong>
