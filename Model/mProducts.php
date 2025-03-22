@@ -38,12 +38,6 @@ class ProductModel {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllBrands() {
-        $query = "SELECT IDHang, TenHang FROM hangsanpham";
-        $result = $this->conn->query($query);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
     public function getProductsByBrand($idHang) {
         $stmt = $this->conn->prepare("SELECT * FROM sanpham WHERE IDHang = ?");
         $stmt->bind_param('i', $idHang);
@@ -67,5 +61,10 @@ class ProductModel {
         return $result && password_verify($password, $result['password']);
     }
 
+    public function getAllBrands() {
+        $query = "SELECT * FROM hangsanpham";
+        $result = $this->conn->query($query);
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+    }
 }
 ?>

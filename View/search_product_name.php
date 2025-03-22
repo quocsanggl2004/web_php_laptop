@@ -1,5 +1,5 @@
 <div class="container mt-4">
-    <h2 class="mb-4">Danh Sách Sản Phẩm</h2>
+    <h2 class="mb-4">Kết Quả Tìm Kiếm: <?= htmlentities($name) ?></h2>
     <div class="row">
         <?php if (empty($products)): ?>
             <p>Không tìm thấy sản phẩm nào.</p>
