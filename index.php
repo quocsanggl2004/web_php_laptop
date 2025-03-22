@@ -14,9 +14,8 @@ $productTypeController = new ProductTypeController();
 
 $action = $_GET['action'] ?? 'home';
 
-// Handle registration
+// Xử lý các hành động liên quan đến người dùng
 if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Kiểm tra và lấy giá trị từ form
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $success = $userController->register($username, $password);
@@ -27,9 +26,7 @@ if ($action === 'register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Handle login
 if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Kiểm tra và lấy giá trị từ form
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $user = $userController->login($username, $password);
@@ -41,7 +38,6 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Handle logout
 if ($action === 'logout') {
     $userController->logout();
     echo "<script>alert('Đã đăng xuất!'); window.location.href='index.php';</script>";
@@ -61,21 +57,21 @@ switch ($action) {
     case 'listProductsByType':
         $idLoai = $_GET['idLoai'] ?? null;
         $products = $productController->listProductsByType($idLoai);
-        require './view/list_product_by_type.php'; // Assume this view handles displaying products
+        require './view/list_product_by_type.php';
         break;
     case 'listProductsByBrand':
         $idHang = $_GET['idHang'] ?? null;
         $products = $productController->listProductsByBrand($idHang);
-        require './view/list_product_by_brand.php'; // Same view
+        require './view/list_product_by_brand.php';
         break;
     case 'search':
         $name = $_GET['name'] ?? '';
         $products = $productController->searchProducts($name);
-        require './view/search_product_name.php'; // Assume this view handles search results
+        require './view/search_product_name.php';
         break;
     default:
         $products = $productController->listProducts();
-        require './view/list_products.php'; // Default to product list
+        require './view/list_products.php';
         break;
 }
 
